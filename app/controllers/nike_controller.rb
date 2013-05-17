@@ -1,5 +1,7 @@
 class NikeController < ApplicationController
 
+  include NikeHelper  
+
   def index
   end
 
@@ -26,9 +28,40 @@ class NikeController < ApplicationController
       @run_array << run
     end
 
+    wdi_arr = @run_array.select{|r| r.start > wdi_time}
+    pre_arr = @run_array.select{|r| r.start < wdi_time}
+
+    speed_wdi = {
+      "graph" => {
+        "title" => "Speed (MPH)", 
+        "total" => false, 
+        "datasequences" => [
+          {
+            "title" => "Before WDI", 
+            "color" => "yellow", 
+            "datapoints" => [
+              {
+                "title" => "Matt", "value" => avg_speed(pre_arr)
+              }
+            ]
+          }, 
+          {
+            "title" => "After WDI", 
+            "color" => "red", 
+            "datapoints" => [
+              {
+                "title" => "Matt", 
+                "value" => avg_speed(wdi_arr)
+              }
+            ]
+          }
+        ]
+      }
+    }
+
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @run_array }
+      format.json { render json: speed_wdi}
     end
   end
 
