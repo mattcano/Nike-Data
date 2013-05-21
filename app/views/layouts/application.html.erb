@@ -2,13 +2,15 @@
 <html>
 <head>
   <title>Nike</title>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <link href="css/steez.css" rel="stylesheet" type="text/css">
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <div class="container">
+    <%= yield %>
+  </div>
 </body>
 </html>
