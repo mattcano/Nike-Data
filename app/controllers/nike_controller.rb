@@ -58,8 +58,11 @@ class NikeController < ApplicationController
         data[m.begin.strftime('%b %y')] += 1 if m.include?(run.start.to_date)
       end
     end
+
+    data_output = data.map { |key, value| {:XVal => key, :YVal => value}}
+    data_array = data.map{|key, value| value}
     
-    render json: data
+    render json: data_array
   end
 
   def d3_show

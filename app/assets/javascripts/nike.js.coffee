@@ -4,12 +4,12 @@
 
 $(document).ready -> 
   container = $('#container')
-  $.ajax(
+  $.ajax
     url: '/d3.json'
     method: 'get'
     dataType: 'json'
     success: (data) ->
-      svg = d3.select('div#container svg');
+      svg = d3.select('div#container svg')
       
       svg.selectAll('rect')
         .data(data)
@@ -19,7 +19,6 @@ $(document).ready ->
         .attr("width", 10)
         .transition()
         .duration(3000)
-        .attr("height", (value[0]))      
-
-  )
+        .attr("height", (value) -> value)
+        .attr("x", (value, i) -> i*15)      
   
